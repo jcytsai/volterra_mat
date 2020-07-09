@@ -1,0 +1,74 @@
+#!/bin/bash
+
+rootname_tmp=LCLSBC2
+
+#-----------------------------------KEEP THE COMMANDS BELOW UNCHANGED-------------------------------------
+. ~/.bashrc
+
+working_folder=${PWD#*/}
+cd $working_folder
+
+rm -r beam_sigma_mat_functions_ELEGANT.o
+rm -r beam_sigma_mat_functions.o
+rm -r elements_geom.o
+rm -r elements_param.o
+rm -r lattice_transport_functions_ELEGANT.o
+rm -r lattice_transport_functions.o
+rm -r mag_layout.o
+rm -r pcentral_function_ELEGANT.o
+rm -r pcentral_function.o
+rm -r RF_elements_info.o
+
+elegant ${rootname_tmp}.ele
+
+sdds2plaindata ${rootname_tmp}.flr elements_geom.o -outputMode=ascii -noRowCount "-separator=\t" -col=ElementType -col=s -col=theta -col=phi
+
+sdds2plaindata ${rootname_tmp}.mat lattice_transport_functions_ELEGANT.o -outputMode=ascii -noRowCount "-separator= " -col=s -col=R11 -col=R12 -col=R13 -col=R14 -col=R15 -col=R16 -col=R21 -col=R22 -col=R23 -col=R24 -col=R25 -col=R26 -col=R31 -col=R32 -col=R33 -col=R34 -col=R35 -col=R36 -col=R41 -col=R42 -col=R43 -col=R44 -col=R45 -col=R46 -col=R51 -col=R52 -col=R53 -col=R54 -col=R55 -col=R56 -col=R61 -col=R62 -col=R63 -col=R64 -col=R65 -col=R66
+
+#sdds2plaindata ${rootname_tmp}.sig beam_sigma_mat_functions_ELEGANT.o -outputMode=ascii -noRowCount "-separator= " -col=s -col=Sx -col=Sy
+
+sdds2plaindata ${rootname_tmp}.cen pcentral_function_ELEGANT.o -outputMode=ascii -noRowCount "-separator= " -col=s -col=pCentral
+
+sdds2plaindata ${rootname_tmp}.param elements_param.o -outputMode=ascii -noRowCount "-separator= " -col=ElementName -col=ElementType -col=ElementParameter -col=ParameterValue
+
+sdds2plaindata ${rootname_tmp}.mag mag_layout.o -outputMode=ascii -noRowCount "-separator= " -col=s -col=Profile
+
+#sdds2plaindata ${rootname_tmp}.twi Twiss_lattice.o -outputMode=ascii -noRowCount "-separator= " -col=s -col=alphax -col=alphay -col=betax -col=betay -col=psix -col=psiy
+
+sdds2plaindata ${rootname_tmp}.twi Twiss_lattice.o -outputMode=ascii -noRowCount "-separator= " -col=s -col=alphax -col=alphay -col=betax -col=betay -col=psix -col=psiy -col=etax -col=etay
+
+sdds2plaindata ${rootname_tmp}.sig beam_sigma_mat_functions_ELEGANT.o -outputMode=ascii -noRowCount "-separator= " -col=s -col=Sx -col=Sy -col=Ss -col=Sdelta -col=enx -col=eny
+
+sed -i '' "s/rootname/${rootname_tmp}/g" input_para.m
+
+#/Applications/MATLAB_R2017a.app/bin/matlab -nodesktop -r 'dipole_info_gen_script; lattice_trans_func_correction_script; pcentral_func_correction_script; beam_sigma_mat_correction_script; input_para;'
+
+/Applications/MATLAB_R2017a.app/bin/matlab -r 'dipole_info_gen_script; lattice_trans_func_correction_script; pcentral_func_correction_script; beam_sigma_mat_correction_script; input_para;'
+
+sed -i '' "s/${rootname_tmp}/rootname/g" input_para.m
+
+rm -r w*.s
+rm -r w*.o
+rm -r ${rootname_tmp}-*
+rm -r ${rootname_tmp}.cen
+rm -r ${rootname_tmp}.fin
+rm -r ${rootname_tmp}.flr
+rm -r ${rootname_tmp}.mag
+rm -r ${rootname_tmp}.mat
+rm -r ${rootname_tmp}.param
+rm -r ${rootname_tmp}.sig
+rm -r ${rootname_tmp}.twi
+rm -r beam_sigma_mat_functions_ELEGANT.o
+rm -r beam_sigma_mat_functions.o
+rm -r elements_geom.o
+rm -r elements_param.o
+rm -r lattice_dipole_info.o
+rm -r lattice_transport_functions_ELEGANT.o
+rm -r lattice_transport_functions.o
+rm -r pcentral_function_ELEGANT.o
+rm -r pcentral_function.o
+rm -r Twiss_lattice.o
+rm -r mag_layout.o
+
+
+exit 0

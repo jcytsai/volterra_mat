@@ -1,0 +1,12 @@
+q: charge, total=1e-9
+
+B1: sbend, angle=+0.032786885,l=0.4,e1= 0.000000000,e2=+0.032786885, edge1_effects=1,edge2_effects=1
+B2: sbend, angle=-0.032786885,l=0.4,e1=-0.032786885,e2= 0.000000000, edge1_effects=1,edge2_effects=1
+B3: sbend, angle=-0.032786885,l=0.4,e1= 0.000000000,e2=-0.032786885, edge1_effects=1,edge2_effects=1
+B4: sbend, angle=+0.032786885,l=0.4,e1=+0.032786885,e2= 0.000000000, edge1_effects=1,edge2_effects=1
+
+L1: drif,l=10.0
+L2: drif,l=0.5
+L3: drif,l=10.0
+
+bl: line=(q,B1,L1,B2,L2,B3,L3,B4)
