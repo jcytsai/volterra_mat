@@ -1,0 +1,60 @@
+q: charge,total=1.0e-9
+
+BX11A   : SBEN,L= 1.016300000E-01, &
+               ANGLE=-4.202069190E-02, &
+               EDGE1_EFFECTS=1,E1= 0.000000000E+00, &
+               EDGE2_EFFECTS=0, &
+               HGAP= 1.333500000E-02
+BX11B   : SBEN,L= 1.018100000E-01, &
+               ANGLE=-4.209511962E-02, &
+               EDGE1_EFFECTS=0, &
+               EDGE2_EFFECTS=1,E2=-8.411581152E-02, &
+               HGAP= 1.333500000E-02
+BX12A   : SBEN,L= 1.018100000E-01, &
+               ANGLE= 4.209511962E-02, &
+               EDGE1_EFFECTS=1,E1= 8.411581152E-02, &
+               EDGE2_EFFECTS=0, &
+               HGAP= 1.333500000E-02
+BX12B   : SBEN,L= 1.016300000E-01, &
+               ANGLE= 4.202069190E-02, &
+               EDGE1_EFFECTS=0, &
+               EDGE2_EFFECTS=1,E2= 0.000000000E+00, &
+               HGAP= 1.333500000E-02
+BX13A   : SBEN,L= 1.016300000E-01, &
+               ANGLE= 4.202069190E-02, &
+               EDGE1_EFFECTS=1,E1= 0.000000000E+00, &
+               EDGE2_EFFECTS=0, &
+               HGAP= 1.333500000E-02
+BX13B   : SBEN,L= 1.018100000E-01, &
+               ANGLE= 4.209511962E-02, &
+               EDGE1_EFFECTS=0, &
+               EDGE2_EFFECTS=1,E2= 8.411581152E-02, &
+               HGAP= 1.333500000E-02
+BX14A   : SBEN,L= 1.018100000E-01, &
+               ANGLE=-4.209511962E-02, &
+               EDGE1_EFFECTS=1,E1=-8.411581152E-02, &
+               EDGE2_EFFECTS=0, &
+               HGAP= 1.333500000E-02
+BX14B   : SBEN,L= 1.016300000E-01, &
+               ANGLE=-4.202069190E-02, &
+               EDGE1_EFFECTS=0, &
+               EDGE2_EFFECTS=1,E2= 0.000000000E+00, &
+               HGAP= 1.333500000E-02
+
+
+L1: drif,l=2.6
+L2: drif,l=0.5
+L3: drif,l=2.6
+
+w1: watch,filename="%s.w1",mode=coord, disable=1
+w2: watch,filename="%s.w2",mode=coord, disable=1
+w3: watch,filename="%s.w3",mode=coord, disable=1
+w4: watch,filename="%s.w4",mode=coord, disable=1
+w5: watch,filename="%s.w5",mode=coord, disable=1
+w6: watch,filename="%s.w6",mode=coord, disable=1
+w7: watch,filename="%s.w7",mode=coord, disable=1
+w8: watch,filename="%s.w8",mode=coord, disable=1
+
+bl: line=(q,BX11A,BX11B,L1,BX12A,BX12B,L2,BX13A,BX13B,L3,BX14A,BX14B,w8)
+
+

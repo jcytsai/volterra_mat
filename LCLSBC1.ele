@@ -1,0 +1,70 @@
+&divide_elements
+    name = *
+    type = SBEN
+    maximum_length = 0.01
+&end
+
+&run_setup
+        lattice = LCLSBC1.lte,
+        default_order = 1,
+        use_beamline = bl,
+        p_central_mev = 250,
+        rootname = LCLSBC1,
+	sigma = %s.sig,
+        centroid = %s.cen,
+        !output = %s.out,
+        !final = %s.fin,
+        magnets = %s.mag,
+	!semaphore_file=%s.sem,
+	parameters=%s.param,
+        print_statistics = 1,
+        !combine_bunch_statistics=1,
+&end
+
+&run_control
+        n_steps = 1
+&end
+
+&bunched_beam
+        n_particles_per_bunch = 500,
+        emit_nx = 1.0e-6,
+	emit_ny = 1.0e-6,
+        beta_x = 15.8, 
+	beta_y = 2.8544,
+	eta_x = 0.0,
+	alpha_x = 2.2,
+	alpha_y = 1.54,
+        sigma_dp = 1.0e-5,
+        sigma_s = 830e-6,
+        momentum_chirp = 21.4,
+        distribution_type[0] = 3*"gaussian",
+        distribution_cutoff[0] = 3*10,
+&end
+
+&twiss_output
+	matched = 0,
+	filename="%s.twi",
+	output_at_each_step=1,
+	statistics=1,
+        beta_x = 15.8, 
+	beta_y = 2.8544,
+	eta_x = 0.0,
+	alpha_x = 2.2,
+	alpha_y = 1.54,
+&end
+
+
+&matrix_output
+	SDDS_output = "%s.mat",
+	output_at_each_step = 1,
+&end
+
+&floor_coordinates
+	filename=%s.flr,
+&end
+
+&track
+&end
+
+
+
