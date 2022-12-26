@@ -1,0 +1,76 @@
+!&divide_elements
+    name = *
+    type = SBEN
+    maximum_length = 0.01
+!&end
+
+
+&run_setup
+        lattice = LCLSBC2.lte,
+        default_order = 1,
+        use_beamline = bl,
+        p_central_mev = 4540.0,
+        sigma = %s.sig,
+	final = %s.fin,
+        centroid = %s.cen,
+        magnets = %s.mag,
+	parameters=%s.param,
+&end
+
+&run_control
+        n_steps = 1
+&end
+
+&bunched_beam
+        n_particles_per_bunch = 504,
+	bunch=%s.bun,
+        emit_nx = 1.0e-6,
+	emit_ny = 1.0e-6,
+        beta_x = 105, 
+	beta_y = 22,
+	eta_x = 0.0,
+	alpha_x = 5,
+	alpha_y = 0,
+        sigma_dp = 3.0e-6,
+        sigma_s = 195.0e-6,
+        momentum_chirp = 39.83,
+        distribution_type[0] = 3*"gaussian",
+        distribution_cutoff[0] = 3*10,
+!    	halton_sequence[0] = 3*1,
+!    	halton_radix[0] =5,7,5,7,2,3,
+!    	randomize_order[0] = 3*2,
+!	optimized_halton = 1,
+&end
+
+!&sdds_beam
+	input = four_particle.sdds,
+	input_type = "elegant",
+!&end
+
+&twiss_output
+	filename="%s.twi",
+	matched = 0,
+	output_at_each_step=1,
+	statistics=1,
+        beta_x = 105, 
+	beta_y = 22,
+	eta_x = 0.0,
+	alpha_x = 5,
+	alpha_y = 0,
+&end
+
+
+&matrix_output
+	SDDS_output = %s.mat,
+	output_at_each_step = 1,
+&end
+
+&floor_coordinates
+	filename=%s.flr,
+&end
+
+&track
+&end
+
+
+

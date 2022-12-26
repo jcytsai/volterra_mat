@@ -1,0 +1,28 @@
+q: charge, total=1e-9
+
+B1: sbend, angle=+0.032786885,l=0.4,e1=0.0,e2=+0.032786885, edge1_effects=1,edge2_effects=1
+B2: sbend, angle=-0.032786885,l=0.4,e1=-0.032786885,e2=0.0, edge1_effects=1,edge2_effects=1
+B3: sbend, angle=-0.032786885,l=0.4,e1=0.0,e2=-0.032786885, edge1_effects=1,edge2_effects=1
+B4: sbend, angle=+0.032786885,l=0.4,e1=+0.032786885,e2=0.0, edge1_effects=1,edge2_effects=1
+
+L1: drif,l=10.0
+L2: drif,l=0.5
+L3: drif,l=10.0
+
+w1: watch,filename="%s-%04ld.w1",mode=coord, disable=0
+bl: line=(q,w1,B1,w1,L1,w1,B2,w1,L2,w1,B3,w1,L3,w1,B4,w1)
+
+
+
+
+
+!w1: watch,filename="%s.w001",mode=coord, disable=0
+!w2: watch,filename="%s.w002",mode=coord, disable=0
+!w3: watch,filename="%s.w003",mode=coord, disable=0
+!w4: watch,filename="%s.w004",mode=coord, disable=0
+!w5: watch,filename="%s.w005",mode=coord, disable=0
+!w6: watch,filename="%s.w006",mode=coord, disable=0
+!w7: watch,filename="%s.w007",mode=coord, disable=0
+!w8: watch,filename="%s.w008",mode=coord, disable=0
+
+!bl: line=(q,w1,B1,w2,L1,w3,B2,w4,L2,w5,B3,w6,L3,w7,B4,w8)
